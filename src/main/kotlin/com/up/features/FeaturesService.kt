@@ -35,7 +35,7 @@ class FeaturesService(val provider: FeaturesProvider) {
     }
 
     fun getQuicklook(featureId: FeatureId): ByteArray? {
-        val quicklookFeature =  provider.getQuicklook(featureId) ?: return null
+        val quicklookFeature = provider.getQuicklook(featureId) ?: return null
         return Base64.getDecoder().decode(quicklookFeature.properties.quicklook)
     }
 }

@@ -5,9 +5,10 @@ import com.google.gson.reflect.TypeToken
 import com.up.features.models.Feature
 import com.up.features.models.FeatureWithQuicklook
 import com.up.features.valueObjects.FeatureId
+import org.springframework.stereotype.Component
 import java.lang.reflect.Type
 
-
+@Component
 class StaticFeaturesProvider : FeaturesProvider {
     val resource = javaClass.getResource("/static/jsondump")
 
@@ -18,13 +19,13 @@ class StaticFeaturesProvider : FeaturesProvider {
         return collection.flatMap { it.features }
     }
 
-    override fun getQuicklook(featureId: FeatureId): FeatureWithQuicklook? {
+    override fun getQuicklook(id: FeatureId): FeatureWithQuicklook? {
         val listType: Type = object : TypeToken<ArrayList<Collection<FeatureWithQuicklook>?>?>() {}.getType()
         val collection: List<Collection<FeatureWithQuicklook>> = Gson().fromJson(resource.readText(), listType)
         return collection.flatMap {
             it.features
         }.firstOrNull {
-            it.properties.uid == featureId.id
+            it.properties.uid == id.id
         }
     }
 }

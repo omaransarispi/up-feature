@@ -8,6 +8,7 @@ data class FeatureWithQuicklook(val properties: FeatureWithQuickLookProperties) 
             return FeatureWithQuicklook(FeatureWithQuickLookProperties(uid, quicklook))
         }
     }
+
     data class FeatureWithQuickLookProperties(val uid: UUID, val quicklook: String)
 }
 

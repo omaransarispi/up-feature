@@ -21,6 +21,7 @@ data class Feature(val properties: FeatureProperties) {
             )
         }
     }
+
     data class FeatureProperties(val uid: UUID, val timestamp: Long, val acquisition: Acquisition)
     data class Acquisition(val missionName: String, val beginViewingDate: Long, val endViewingDate: Long)
 }
