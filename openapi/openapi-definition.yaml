@@ -47,12 +47,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Feature"
+        '404':
+          description: "A 404 indicates the requested feature was not found"
+        '422':
+          description: "Malformed feature ids generally result in a 422"
         '500':
           description: Internal Server Error
         '503':
           description: Service Unavailable
-        '422':
-          description: "Malformed feature ids generally result in a 422"
 components:
   schemas:
     Features:

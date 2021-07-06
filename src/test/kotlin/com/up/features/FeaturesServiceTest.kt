@@ -87,4 +87,27 @@ class FeaturesServiceTest {
         )
         Assertions.assertEquals(expectedResponse, results)
     }
+
+    @Test
+    fun `returns null if no feature is found`() {
+        val id = UUID.fromString("39c2f29e-c0f8-4a39-a98b-deed547d6aea")
+        val missionName = "Sentinel-1B"
+        val timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay())
+        val acquisitionBeginViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1))
+        val acquisitionEndViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1))
+        val fakeFeatures = listOf(
+            Feature.getInstance(
+                UUID.randomUUID(),
+                missionName,
+                timestamp,
+                acquisitionBeginViewingDate,
+                acquisitionEndViewingDate,
+            )
+        )
+        Mockito.`when`(mockFeaturesProvider.getFeatures()).thenReturn(fakeFeatures)
+        val service = FeaturesService(mockFeaturesProvider)
+
+        val results = service.getFeatureById(FeatureId.getInstance(id.toString())!!)
+        Assertions.assertEquals(null, results)
+    }
 }

@@ -19,7 +19,7 @@ class FeaturesService(val provider: FeaturesProvider) {
         }
     }
 
-    fun getFeatureById(featureId: FeatureId): FeatureResponse {
+    fun getFeatureById(featureId: FeatureId): FeatureResponse? {
         return provider.getFeatures()
             .filter { it.properties.uid == featureId.id }
             .map {
@@ -30,6 +30,6 @@ class FeaturesService(val provider: FeaturesProvider) {
                     it.properties.acquisition.beginViewingDate,
                     it.properties.acquisition.endViewingDate
                 )
-        }.first()
+            }.getOrNull(0)
     }
 }

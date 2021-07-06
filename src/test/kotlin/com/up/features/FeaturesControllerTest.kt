@@ -72,6 +72,17 @@ class FeaturesControllerTest(@Autowired val mvc: MockMvc) {
     }
 
     @Test
+    fun `returns a 404 when requested feature is not found`() {
+        val id = "39c2f29e-c0f8-4a39-a98b-deed547d6aea"
+        Mockito.`when`(mockFeaturesService.getFeatureById(FeatureId.getInstance(id)!!))
+            .thenReturn(null)
+
+        mvc.get("/features/$id") { accept = MediaType.APPLICATION_JSON }.andExpect {
+            status { isNotFound() }
+        }
+    }
+
+    @Test
     fun `returns a 422 response when a malformed id is sent`() {
         val id = "malformed-id"
         mvc.get("/features/$id") { accept = MediaType.APPLICATION_JSON }.andExpect {
