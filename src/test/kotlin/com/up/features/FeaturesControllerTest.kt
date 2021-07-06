@@ -52,7 +52,7 @@ class FeaturesControllerTest(@Autowired val mvc: MockMvc) {
         val timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay()).time
         val beginTimestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1)).time
         val endTimestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1)).time
-        Mockito.`when`(mockFeaturesService.getFeatureById(FeatureId.getInstance(id)!!))
+        Mockito.`when`(mockFeaturesService.getFeature(FeatureId.getInstance(id)!!))
             .thenReturn(FeatureResponse(id, missionName, timestamp, beginTimestamp, endTimestamp))
 
         mvc.get("/features/$id") { accept = MediaType.APPLICATION_JSON }.andExpect {
@@ -74,7 +74,7 @@ class FeaturesControllerTest(@Autowired val mvc: MockMvc) {
     @Test
     fun `returns a 404 when requested feature is not found`() {
         val id = "39c2f29e-c0f8-4a39-a98b-deed547d6aea"
-        Mockito.`when`(mockFeaturesService.getFeatureById(FeatureId.getInstance(id)!!))
+        Mockito.`when`(mockFeaturesService.getFeature(FeatureId.getInstance(id)!!))
             .thenReturn(null)
 
         mvc.get("/features/$id") { accept = MediaType.APPLICATION_JSON }.andExpect {

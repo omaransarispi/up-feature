@@ -4,6 +4,7 @@ import com.up.features.providers.FeaturesProvider
 import com.up.features.responses.FeatureResponse
 import com.up.features.valueObjects.FeatureId
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class FeaturesService(val provider: FeaturesProvider) {
@@ -19,7 +20,7 @@ class FeaturesService(val provider: FeaturesProvider) {
         }
     }
 
-    fun getFeatureById(featureId: FeatureId): FeatureResponse? {
+    fun getFeature(featureId: FeatureId): FeatureResponse? {
         return provider.getFeatures()
             .filter { it.properties.uid == featureId.id }
             .map {
@@ -31,5 +32,11 @@ class FeaturesService(val provider: FeaturesProvider) {
                     it.properties.acquisition.endViewingDate
                 )
             }.getOrNull(0)
+    }
+
+    fun getQuicklook(featureId: FeatureId): ByteArray? {
+        val quicklookFeature =  provider.getQuicklook(featureId) ?: return null
+        val quicklook = quicklookFeature.properties.quicklook
+        return Base64.getDecoder().decode(quicklookFeature.properties.quicklook)
     }
 }

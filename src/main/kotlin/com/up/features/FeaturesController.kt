@@ -17,7 +17,7 @@ class FeaturesController(val featuresService: FeaturesService) {
     fun byId(@PathVariable id: String): ResponseEntity<FeatureResponse> {
         val featureId: FeatureId = FeatureId.getInstance(id) ?: return ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY)
 
-        val response = featuresService.getFeatureById(featureId)
+        val response = featuresService.getFeature(featureId)
         return if (response == null) {
             ResponseEntity(HttpStatus.NOT_FOUND)
         } else {
