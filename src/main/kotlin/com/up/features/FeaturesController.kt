@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/features", headers = ["Accept=*/*"])
+@RequestMapping("/features")
 class FeaturesController(val featuresService: FeaturesService) {
-    @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.ALL_VALUE])
+    @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun byId(@PathVariable id: String): ResponseEntity<FeatureResponse> {
         val featureId: FeatureId = FeatureId.getInstance(id) ?: return ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY)
 
@@ -25,7 +25,18 @@ class FeaturesController(val featuresService: FeaturesService) {
         }
     }
 
-    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.ALL_VALUE])
+    @GetMapping("/{id}/quicklook", produces = [MediaType.IMAGE_PNG_VALUE])
+    fun featureQuicklook(@PathVariable id: String): ResponseEntity<ByteArray> {
+        val featureId: FeatureId = FeatureId.getInstance(id) ?: return ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY)
+        val response = featuresService.getQuicklook(featureId)
+        return if (response == null) {
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        } else {
+            ResponseEntity.ok(response)
+        }
+    }
+
+    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun list(): List<FeatureResponse> {
         return featuresService.getFeatures()
     }

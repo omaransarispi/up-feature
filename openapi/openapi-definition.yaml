@@ -30,7 +30,7 @@ paths:
   /features/{id}:
     get:
       tags:
-        - Features, Feature
+        - Features
       summary: This endpoint returns a feature identified by its id along with its meta data
       parameters:
         - in: path
@@ -47,6 +47,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Feature"
+        '404':
+          description: "A 404 indicates the requested feature was not found"
+        '422':
+          description: "Malformed feature ids generally result in a 422"
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  /features/{id}/quicklook:
+    get:
+      tags:
+        - Features
+      summary: This endpoint returns a preview image of the feature
+      parameters:
+        - in: path
+          name: id
+          description: "Id of a feature."
+          required: true
+          schema:
+            type: string
+            example: "39c2f29e-c0f8-4a39-a98b-deed547d6aea"
+      responses:
+        '200':           # Response
+          description: OK
+          content:       # Response body
+            image/png:     # Media type
+              schema:
+                type: string
+                format: binary
         '404':
           description: "A 404 indicates the requested feature was not found"
         '422':

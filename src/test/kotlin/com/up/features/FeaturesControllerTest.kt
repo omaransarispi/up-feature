@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import java.sql.Timestamp
 import java.time.LocalDate
+import java.util.*
 
 
 @WebMvcTest
@@ -83,9 +84,40 @@ class FeaturesControllerTest(@Autowired val mvc: MockMvc) {
     }
 
     @Test
-    fun `returns a 422 response when a malformed id is sent`() {
+    fun `returns a 422 response when a feature identified by a malformed id is sent`() {
         val id = "malformed-id"
         mvc.get("/features/$id") { accept = MediaType.APPLICATION_JSON }.andExpect {
+            status { isUnprocessableEntity() }
+        }
+    }
+
+    @Test
+    fun `returns a quicklook when requested`() {
+        val id = "39c2f29e-c0f8-4a39-a98b-deed547d6aea"
+        Mockito.`when`(mockFeaturesService.getQuicklook(FeatureId.getInstance(id)!!))
+            .thenReturn(Base64.getDecoder().decode("aGVsbG8gd29ybGQ="))
+
+        mvc.get("/features/$id/quicklook") { accept = MediaType.IMAGE_PNG }.andExpect {
+            content { contentType(MediaType.IMAGE_PNG_VALUE) }
+            status { isOk() }
+        }
+    }
+
+    @Test
+    fun `returns a 404 when requested features quicklook is not found`() {
+        val id = "39c2f29e-c0f8-4a39-a98b-deed547d6aea"
+        Mockito.`when`(mockFeaturesService.getQuicklook(FeatureId.getInstance(id)!!))
+            .thenReturn(null)
+
+        mvc.get("/features/$id/quicklook") { accept = MediaType.IMAGE_PNG }.andExpect {
+            status { isNotFound() }
+        }
+    }
+
+    @Test
+    fun `returns a 422 response when a malformed id is sent for the quicklook`() {
+        val id = "malformed-id"
+        mvc.get("/features/$id/quicklook") { accept = MediaType.IMAGE_PNG }.andExpect {
             status { isUnprocessableEntity() }
         }
     }
