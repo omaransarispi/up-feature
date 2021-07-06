@@ -1,6 +1,8 @@
 package com.up.features.providers
 
 import com.up.features.models.Feature
+import com.up.features.models.FeatureWithQuicklook
+import com.up.features.valueObjects.FeatureId
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -37,4 +39,12 @@ class StaticFeaturesProviderTest {
         )
         Assertions.assertEquals(expectedResult, results)
     }
+
+    @Test
+    fun `given quick look exists, deserializes it`() {
+        val result: FeatureWithQuicklook =
+            StaticFeaturesProvider().getQuicklook(FeatureId.getInstance("39c2f29e-c0f8-4a39-a98b-deed547d6aeb")!!)!!
+        Assertions.assertEquals("fake_quick_look_2", result.properties.quicklook)
+    }
+
 }
