@@ -26,7 +26,7 @@ class FeaturesServiceTest {
         val acquisitionBeginViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1))
         val acquisitionEndViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1))
         val fakeFeatures = listOf(
-            Feature(
+            Feature.getInstance(
                 id,
                 missionName,
                 timestamp,
