@@ -19,8 +19,17 @@ class FeaturesService(val provider: FeaturesProvider) {
         }
     }
 
-    fun getFeature(featureId: FeatureId): FeatureResponse {
-        /** TODO: Implement **/
-        return FeatureResponse("id", "mission", 1L, 1L, 1L)
+    fun getFeatureById(featureId: FeatureId): FeatureResponse {
+        return provider.getFeatures()
+            .filter { it.properties.uid == featureId.id }
+            .map {
+                FeatureResponse(
+                    it.properties.uid.toString(),
+                    it.properties.acquisition.missionName,
+                    it.properties.timestamp,
+                    it.properties.acquisition.beginViewingDate,
+                    it.properties.acquisition.endViewingDate
+                )
+        }.first()
     }
 }

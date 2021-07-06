@@ -52,7 +52,7 @@ class FeaturesControllerTest(@Autowired val mvc: MockMvc) {
         val timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay()).time
         val beginTimestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1)).time
         val endTimestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1)).time
-        Mockito.`when`(mockFeaturesService.getFeature(FeatureId.getInstance(id)!!))
+        Mockito.`when`(mockFeaturesService.getFeatureById(FeatureId.getInstance(id)!!))
             .thenReturn(FeatureResponse(id, missionName, timestamp, beginTimestamp, endTimestamp))
 
         mvc.get("/features/$id") { accept = MediaType.APPLICATION_JSON }.andExpect {

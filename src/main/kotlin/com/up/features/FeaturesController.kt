@@ -16,7 +16,7 @@ class FeaturesController(val featuresService: FeaturesService) {
     @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.ALL_VALUE])
     fun byId(@PathVariable id: String): ResponseEntity<FeatureResponse> {
         val featureId: FeatureId = FeatureId.getInstance(id) ?: return ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY)
-        return ResponseEntity.ok(featuresService.getFeature(featureId))
+        return ResponseEntity.ok(featuresService.getFeatureById(featureId))
     }
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.ALL_VALUE])

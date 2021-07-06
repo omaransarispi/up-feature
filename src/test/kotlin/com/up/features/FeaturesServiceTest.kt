@@ -3,6 +3,7 @@ package com.up.features
 import com.up.features.models.Feature
 import com.up.features.providers.FeaturesProvider
 import com.up.features.responses.FeatureResponse
+import com.up.features.valueObjects.FeatureId
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -46,6 +47,43 @@ class FeaturesServiceTest {
                 acquisitionBeginViewingDate.time,
                 acquisitionEndViewingDate.time
             )
+        )
+        Assertions.assertEquals(expectedResponse, results)
+    }
+
+    @Test
+    fun `returns a unique feature identified by its id`() {
+        val id = UUID.fromString("39c2f29e-c0f8-4a39-a98b-deed547d6aea")
+        val missionName = "Sentinel-1B"
+        val timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay())
+        val acquisitionBeginViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1))
+        val acquisitionEndViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1))
+        val fakeFeatures = listOf(
+            Feature.getInstance(
+                id,
+                missionName,
+                timestamp,
+                acquisitionBeginViewingDate,
+                acquisitionEndViewingDate,
+            ),
+            Feature.getInstance(
+                UUID.randomUUID(),
+                missionName,
+                timestamp,
+                acquisitionBeginViewingDate,
+                acquisitionEndViewingDate,
+            )
+        )
+        Mockito.`when`(mockFeaturesProvider.getFeatures()).thenReturn(fakeFeatures)
+        val service = FeaturesService(mockFeaturesProvider)
+
+        val results = service.getFeatureById(FeatureId.getInstance(id.toString())!!)
+        val expectedResponse = FeatureResponse(
+            id.toString(),
+            missionName,
+            timestamp.time,
+            acquisitionBeginViewingDate.time,
+            acquisitionEndViewingDate.time
         )
         Assertions.assertEquals(expectedResponse, results)
     }
