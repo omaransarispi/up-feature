@@ -4,8 +4,12 @@ import java.util.*
 
 data class FeatureId(val id: UUID) {
     companion object {
-        fun getInstance(id: String): FeatureId {
-            return FeatureId(UUID.fromString(id))
+        fun getInstance(id: String): FeatureId? {
+            try {
+                return FeatureId(UUID.fromString(id))
+            } catch (ex: IllegalArgumentException) {
+                return null
+            }
         }
     }
 }
