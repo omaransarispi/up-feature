@@ -15,11 +15,11 @@ class FeaturesController {
     fun list(): List<FeatureResponse> {
         return listOf(
             FeatureResponse(
-                "id",
-                Timestamp.valueOf(LocalDate.now().atStartOfDay()),
-                LocalDate.now().atStartOfDay(),
-                LocalDate.now().atStartOfDay().plusHours(1),
-                "Sentinel-1B"
+                id = "id",
+                missionName = "Sentinel-1B",
+                timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay()).time,
+                beginViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1)).time,
+                endViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1)).time
             )
         )
     }

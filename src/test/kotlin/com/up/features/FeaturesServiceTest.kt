@@ -40,9 +40,9 @@ class FeaturesServiceTest {
             FeatureResponse(
                 id.toString(),
                 missionName,
-                timestamp,
-                acquisitionBeginViewingDate,
-                acquisitionEndViewingDate
+                timestamp.time,
+                acquisitionBeginViewingDate.time,
+                acquisitionEndViewingDate.time
             )
         )
         Assertions.assertEquals(expectedResponse, results)

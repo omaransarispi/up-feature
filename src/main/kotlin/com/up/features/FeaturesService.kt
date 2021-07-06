@@ -8,9 +8,9 @@ class FeaturesService(val provider: FeaturesProvider) {
             FeatureResponse(
                 it.id.toString(),
                 it.missionName,
-                it.timestamp,
-                it.acquisitionBeginViewingDate,
-                it.acquisitionEndViewingDate
+                it.timestamp.time,
+                it.acquisitionBeginViewingDate.time,
+                it.acquisitionEndViewingDate.time
             )
         }
     }
