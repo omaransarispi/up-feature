@@ -23,9 +23,9 @@ class StaticFeaturesProvider : FeaturesProvider {
         val collection: List<Collection<FeatureWithQuicklook>> = Gson().fromJson(resource.readText(), listType)
         return collection.flatMap {
             it.features
-        }.filter {
+        }.firstOrNull {
             it.properties.uid == featureId.id
-        }.firstOrNull()
+        }
     }
 }
 

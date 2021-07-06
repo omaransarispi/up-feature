@@ -47,4 +47,10 @@ class StaticFeaturesProviderTest {
         Assertions.assertEquals("fake_quick_look_2", result.properties.quicklook)
     }
 
+    @Test
+    fun `given feature for the requested quicklook does not exist, return null`() {
+        val result: FeatureWithQuicklook? =
+            StaticFeaturesProvider().getQuicklook(FeatureId.getInstance("49c2f29e-c0f8-4a39-a98b-deed547d6aeb")!!)
+        Assertions.assertEquals(null, result)
+    }
 }
