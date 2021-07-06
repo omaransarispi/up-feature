@@ -2,6 +2,7 @@ package com.up.features
 
 import com.up.features.providers.FeaturesProvider
 import com.up.features.responses.FeatureResponse
+import com.up.features.valueObjects.FeatureId
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,5 +17,10 @@ class FeaturesService(val provider: FeaturesProvider) {
                 it.properties.acquisition.endViewingDate
             )
         }
+    }
+
+    fun getFeature(featureId: FeatureId): FeatureResponse {
+        /** TODO: Implement **/
+        return FeatureResponse("id", "mission", 1L, 1L, 1L)
     }
 }
