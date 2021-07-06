@@ -1,5 +1,6 @@
 package com.up.features
 
+import com.up.features.models.Feature
 import com.up.features.responses.FeatureResponse
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -24,7 +25,7 @@ class FeaturesServiceTest {
         val acquisitionBeginViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1))
         val acquisitionEndViewingDate = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1))
         val fakeFeatures = listOf(
-            Features(
+            Feature(
                 id,
                 missionName,
                 timestamp,

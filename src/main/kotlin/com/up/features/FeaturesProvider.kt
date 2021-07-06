@@ -1,16 +1,7 @@
 package com.up.features
 
-import java.sql.Timestamp
-import java.util.*
+import com.up.features.models.Feature
 
 interface FeaturesProvider {
-    fun getFeatures(): List<Features>
+    fun getFeatures(): List<Feature>
 }
-
-data class Features(
-    val id: UUID,
-    val missionName: String,
-    val timestamp: Timestamp,
-    val acquisitionBeginViewingDate: Timestamp,
-    val acquisitionEndViewingDate: Timestamp
-)
