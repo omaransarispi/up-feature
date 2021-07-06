@@ -1,4 +1,4 @@
-package com.up.features
+package com.up.features.providers
 
 import com.up.features.models.Feature
 

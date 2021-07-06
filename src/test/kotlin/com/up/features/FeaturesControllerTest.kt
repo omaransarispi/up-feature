@@ -2,7 +2,6 @@ package com.up.features
 
 import com.up.features.responses.FeatureResponse
 import org.junit.jupiter.api.Test
-import org.mockito.Mock
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -26,7 +25,8 @@ class FeaturesControllerTest(@Autowired val mvc: MockMvc) {
         val timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay()).time
         val beginTimestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay().minusHours(1)).time
         val endTimestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay().plusHours(1)).time
-        Mockito.`when`(mockFeaturesService.getFeatures()).thenReturn(listOf(FeatureResponse(id, missionName, timestamp, beginTimestamp, endTimestamp)))
+        Mockito.`when`(mockFeaturesService.getFeatures())
+            .thenReturn(listOf(FeatureResponse(id, missionName, timestamp, beginTimestamp, endTimestamp)))
 
         mvc.get("/features") { accept = MediaType.APPLICATION_JSON }.andExpect {
             val expectedResponse = """

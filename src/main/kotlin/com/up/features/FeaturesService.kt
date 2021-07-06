@@ -1,5 +1,6 @@
 package com.up.features
 
+import com.up.features.providers.FeaturesProvider
 import com.up.features.responses.FeatureResponse
 import org.springframework.stereotype.Service
 
