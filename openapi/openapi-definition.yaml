@@ -1,0 +1,84 @@
+openapi: '3.0.0'
+info:
+  description: "An API to return a list of features, representing an image, along with its meta data."
+  version: 0.1.0
+  title: UP42 Features
+  contact:
+    email: omar.ansari.wt@gmail.com
+servers:
+  - url: http://127.0.0.1:8080
+    description: Dev Environment
+paths:
+  /features:
+    get:
+      tags:
+        - Features
+      summary: This endpoint returns a collection of features along with their meta data
+      responses:
+        '200':
+          description: 'Success: Returns a collection of features'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Features"
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+        '422':
+          description: "Malformed feature ids generally result in a 422"
+  /features/{id}:
+    get:
+      tags:
+        - Features, Feature
+      summary: This endpoint returns a feature identified by its id along with its meta data
+      parameters:
+        - in: path
+          name: id
+          description: "Id of a feature."
+          required: true
+          schema:
+            type: string
+            example: "39c2f29e-c0f8-4a39-a98b-deed547d6aea"
+      responses:
+        '200':
+          description: 'Success: Returns a feature'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feature"
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+        '422':
+          description: "Malformed feature ids generally result in a 422"
+components:
+  schemas:
+    Features:
+      description:
+        A collection of features identifying images along with their meta data.
+      type: array
+      items:
+        $ref: '#/components/schemas/Feature'
+    Feature:
+      description:
+        A feature identifying an image along with its meta data.
+      type: object
+      properties:
+        id:
+          type: string
+          description:
+            Id of the feature
+        missionName:
+          type: string
+          description: "?"
+        timestamp:
+          type: string
+          description: "?"
+        beginViewingDate:
+          type: string
+          description: "?"
+        endViewingDate:
+          type: string
+          description: "?"
