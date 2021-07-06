@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class FeaturesApplication
 
 fun main(args: Array<String>) {
-	runApplication<FeaturesApplication>(*args)
+    runApplication<FeaturesApplication>(*args)
 }
