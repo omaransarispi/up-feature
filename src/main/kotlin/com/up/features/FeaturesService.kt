@@ -10,10 +10,10 @@ class FeaturesService(val provider: FeaturesProvider) {
         return provider.getFeatures().map {
             FeatureResponse(
                 it.properties.uid.toString(),
-                it.acquisition.missionName,
+                it.properties.acquisition.missionName,
                 it.properties.timestamp,
-                it.acquisition.beginViewingDate,
-                it.acquisition.endViewingDate
+                it.properties.acquisition.beginViewingDate,
+                it.properties.acquisition.endViewingDate
             )
         }
     }

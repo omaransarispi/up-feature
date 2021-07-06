@@ -187,8 +187,8 @@
         ]
       },
       "properties": {
-        "id": "39c2f29e-c0f8-4a39-a98b-deed547d6aea",
-        "timestamp": 1554831167697,
+        "id": "39c2f29e-c0f8-4a39-a98b-deed547d6aeb",
+        "timestamp": 1554831167698,
         "centroid": {
           "type": "Point",
           "coordinates": [
@@ -247,7 +247,7 @@
           }
         },
         "timeStamp": 1554831167697,
-        "uid": "39c2f29e-c0f8-4a39-a98b-deed547d6aea",
+        "uid": "39c2f29e-c0f8-4a39-a98b-deed547d6aeb",
         "enrichment": {
           "naturallanguage": {
             "search_date_string": "2019 April 09 17: 17:32 17:32:47",
@@ -266,12 +266,12 @@
         "transmission": {},
         "contentDescription": {},
         "acquisition": {
-          "endViewingDate": 1554831202043,
+          "endViewingDate": 1554831202045,
           "mission": "Sentinel-1",
           "missionId": "B",
           "missionCode": "S1B",
-          "beginViewingDate": 1554831167697,
-          "missionName": "Sentinel-1B",
+          "beginViewingDate": 1554831167698,
+          "missionName": "Sentinel-1C",
           "polarization": "VV VH",
           "sensorMode": "IW",
           "sensorId": "SAR-C SAR"
