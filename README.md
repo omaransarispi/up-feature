@@ -33,3 +33,4 @@ Improvements
 3. CORS origins header is very liberal at the moment. Should be made more specific before
 deploying to production
 4. Linter such as spotless to enforce codestyle and optimize imports
+5. Structured API error messages
