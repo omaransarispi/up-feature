@@ -44,7 +44,7 @@ class StaticFeaturesProviderTest {
     fun `given quick look exists, deserializes it`() {
         val result: FeatureWithQuicklook =
             StaticFeaturesProvider().getQuicklook(FeatureId.getInstance("39c2f29e-c0f8-4a39-a98b-deed547d6aeb")!!)!!
-        Assertions.assertEquals("fake_quick_look_2", result.properties.quicklook)
+        Assertions.assertEquals("SGVsbG8gV29ybGQ=", result.properties.quicklook)
     }
 
     @Test
