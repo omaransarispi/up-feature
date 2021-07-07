@@ -1,6 +1,9 @@
 # UP42-Feature
 
-## JDK
+## Overview 
+A springboot powered restful API that exposes representation of images as features along with the meta data. 
+
+### JDK version
 This application has been compiled and tested with `adoptopen-jdk-11`. 
 > Depending on your OS you can switch your JVM version by using tools like jenv (mac os) or sdkman (ubuntu)
 ## Design Spec
