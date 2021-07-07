@@ -22,8 +22,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation ("com.google.code.gson:gson:2.8.7")
-    // https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-    implementation ("io.projectreactor:reactor-core:3.4.7")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
